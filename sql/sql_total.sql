@@ -1,9 +1,9 @@
 -- 회원테이블 (Member): id, password, nincname, email, reg_date, level, ip, score
 CREATE TABLE member (
-    id VARCHAR2(50) PRIMARY KEY,
-    pwd VARCHAR2(50) NOT NULL,
-    nickname VARCHAR2(50) UNIQUE NOT NULL,
-    email VARCHAR2(50) NOT NULL,
+    id VARCHAR2(32) PRIMARY KEY,
+    pwd VARCHAR2(128) NOT NULL,
+    nickname VARCHAR2(32) UNIQUE NOT NULL,
+    email VARCHAR2(64) NOT NULL,
     reg_date DATE DEFAULT SYSDATE,
     level_no NUMBER(2) DEFAULT 1,
     ip VARCHAR2(32),
@@ -14,7 +14,7 @@ CREATE TABLE member (
 CREATE TABLE Category (
     cate_no NUMBER PRIMARY KEY,
     used number(1) NOT NULL,
-    name VARCHAR(50) NOT NULL,
+    name VARCHAR(32) NOT NULL,
     group_num number(2) NOT NULL,
     order_num number(2) NOT NULL
 );
@@ -25,9 +25,9 @@ CREATE SEQUENCE cate_seq;
 CREATE TABLE board (
     board_no NUMBER PRIMARY KEY,
 	cate_no NUMBER NOT NULL,
-	writer VARCHAR2(50) NOT NULL,
-	writer_id VARCHAR2(50) NOT NULL,
-	title VARCHAR2(50) NOT NULL,
+	writer VARCHAR2(32) NOT NULL,
+	writer_id VARCHAR2(32) NOT NULL,
+	title VARCHAR2(32) NOT NULL,
 	content VARCHAR2(2000) NOT NULL,
 	writer_date DATE DEFAULT SYSDATE,
 	hit_cnt NUMBER DEFAULT 0,
@@ -40,8 +40,8 @@ CREATE SEQUENCE board_seq;
 CREATE TABLE board_comment (
 	no NUMBER PRIMARY KEY,
 	board_no NUMBER NOT NULL,
-	writer VARCHAR2(50) NOT NULL,
-	writer_id VARCHAR2(50) NOT NULL,
+	writer VARCHAR2(32) NOT NULL,
+	writer_id VARCHAR2(32) NOT NULL,
 	content VARCHAR2(500) NOT NULL,
 	writer_date DATE DEFAULT SYSDATE
 );
@@ -52,9 +52,9 @@ CREATE SEQUENCE comment_seq;
 CREATE TABLE board_file (
 	no NUMBER PRIMARY KEY,
 	board_no NUMBER NOT NULL,
-	file_path VARCHAR2(100) NOT NULL,
-	ori_name VARCHAR2(200) NOT NULL,
-	system_name VARCHAR2(200) NOT NULL,
+	file_path VARCHAR2(128) NOT NULL,
+	ori_name VARCHAR2(256) NOT NULL,
+	system_name VARCHAR2(256) NOT NULL,
 	file_size NUMBER NOT NULL
 );
 
@@ -62,7 +62,7 @@ CREATE SEQUENCE board_file_seq;
 
 -- 스케치 퀴즈 테이블 (Sketch_Quiz): quiz, score
 CREATE TABLE sketch_quiz (
-	quiz VARCHAR2(50) PRIMARY KEY,
+	quiz VARCHAR2(32) PRIMARY KEY,
 	score NUMBER(3) NOT NULL
 );
 
