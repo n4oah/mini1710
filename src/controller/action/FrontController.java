@@ -12,16 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/aosdk")
-public class MainServlet extends HttpServlet {
+public class FrontController extends HttpServlet {
 	Map<String, String> map;
 	
 	@Override
 	public void init() throws ServletException {
-		map = new HashMap<String, String>();
+		map = new HashMap<>();
 		
 		map.put("main.do", "/index.jsp");
-		map.put("errorPage.do", "/index.jsp");
 	}
 
 	@Override
@@ -34,31 +32,23 @@ public class MainServlet extends HttpServlet {
 		Iterator<String> it = map.keySet().iterator();
 		
 		String key = null;
+		String value = null;
+		
 		while(it.hasNext()) {
 			if(uri.equals(key = it.next())) {
-				String value = map.get(key);
+				value = map.get(key);
 				
 				if(value.lastIndexOf(".jsp") != -1) {
-					System.out.println("aabb");
-					
 					actForward.setForward(true);
-					actForward.setPath(path + value);
+					actForward.setPath(value);
 				} else {
 					
 				}
 				break;
 			}
-			else if(!it.hasNext()) {
-				System.out.println("asdiojasfj");
-				
-				actForward.setForward(false);
-				actForward.setPath(path + "/errorPage");
-			}
 		}
 		
 		if(actForward.isForward()) {
-			System.out.println(actForward.getPath());
-			
 			RequestDispatcher rd = request.getRequestDispatcher(actForward.getPath());
 			rd.forward(request, response);
 		} else {
