@@ -9,12 +9,27 @@ public class ConnectionPool {
 	private static final int INIT_COUNT = 3;
 	private static List<Connection> free = new ArrayList<>();
 	private static List<Connection> used = new ArrayList<>();
+	
+	private static final String
+			ORACLE_HOST = "localhost",
+			ORACLE_PORT = "1521",
+			ORACLE_SID 	= "xe",
+			ORACLE_USER = "mini1710",
+			ORACLE_PASS = "1234";
+	/*
+	private static final String
+			ORACLE_HOST = "localhost",
+			ORACLE_PORT = "1521",
+			ORACLE_SID 	= "system",
+			ORACLE_USER = "hr",
+			ORACLE_PASS = "oracle";
+	 */
 
 	static {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			for (int i = 0; i < INIT_COUNT; i++) {
-				Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
+				Connection con = DriverManager.getConnection("jdbc:oracle:thin:@" + ORACLE_HOST + ":" + ORACLE_PORT + ":" + ORACLE_SID, ORACLE_USER, ORACLE_PASS);
 				free.add(con);
 			}
 		} catch (Exception e) {

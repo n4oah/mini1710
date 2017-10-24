@@ -7,30 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메인페이지</title>
 <%@ include file="/jsp/include/basic.jsp"%>
-<link rel="stylesheet" href="./css/navber.css" />
 </head>
 <body>
-	<nav class="navbar navbar-default">
-	<div class="container">
-		<div class="row">
-			<div class="collapse navbar-collapse" id="navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Programming</a></li>
-					<li><a href="#">Community</a></li>
-					<li><a href="#">Sketch quiz</a></li>
-				</ul>
-			</div>
-			<!-- <div class="navbar-header page-scroll">
-	                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-	                    <span class="sr-only">Toggle navigation</span>
-	                    <span class="icon-bar"></span>
-	                    <span class="icon-bar"></span>
-	                    <span class="icon-bar"></span>
-	                </button>
-	            </div> -->
-		</div>
-	</div>
-	</nav>
+	<%@ include file="/jsp/include/topmenu.jsp" %>
+	<%@ include file="/jsp/include/bottom.jsp" %>
+	
+	<script type="text/javascript">
+		$(".navbar.navbar-default ul.nav.navbar-nav > li").removeClass("active");
+		$(".navbar.navbar-default ul.nav.navbar-nav > li:eq(0)").addClass("active");
+	</script>
 </body>
 </html>

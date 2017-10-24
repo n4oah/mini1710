@@ -14,7 +14,7 @@ CREATE TABLE member (
 CREATE TABLE Category (
     cate_no NUMBER PRIMARY KEY,
     used number(1) NOT NULL,
-    name VARCHAR(32) NOT NULL,
+    name VARCHAR(32) NOT NULL UNIQUE,
     group_num number(2) NOT NULL,
     order_num number(2) NOT NULL
 );

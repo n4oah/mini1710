@@ -7,52 +7,66 @@ import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class FrontController extends HttpServlet {
-	Map<String, String> map;
+	MappingData map = null;
 	
 	@Override
 	public void init() throws ServletException {
-		map = new HashMap<>();
+		map = MappingData.getInstance();
+		map.put("main.do", new PageConfig("/index.jsp", false));
+		map.put("loginform.do", new PageConfig("/login.jsp", false));
+		map.put("category/cateAdd.do", new PageConfig("controller.category.CateAddCtrl", false));
 		
-		map.put("main.do", "/index.jsp");
+		BoardDAO
 	}
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = request.getContextPath();
-		String uri = request.getRequestURI().substring(path.length() + 1);
+		request.setCharacterEncoding("UTF-8");
 		
-		ActionForward actForward = new ActionForward();
+		String contextPath = request.getContextPath();
+		String uri 	= request.getRequestURI().substring(contextPath.length() + 1);
 		
-		Iterator<String> it = map.keySet().iterator();
+		ActionForward forward = new ActionForward();
 		
-		String key = null;
-		String value = null;
+		String key 		= null;
+		String path 	= null;
 		
-		while(it.hasNext()) {
-			if(uri.equals(key = it.next())) {
-				value = map.get(key);
+		try {
+			Iterator<String> it = map.keySet().iterator();
+			while(it.hasNext()) {
 				
-				if(value.lastIndexOf(".jsp") != -1) {
-					actForward.setForward(true);
-					actForward.setPath(value);
-				} else {
-					
+				if (uri.equals(key = it.next())) {
+					path = map.get(key).getPath();
+
+					if (map.get(key).isLoggin() != true) {
+						if (path.lastIndexOf(".jsp") != -1) {
+							forward.setForward(true);
+							forward.setPath(path);
+						} else {
+							Action action = (Action) Class.forName(path).newInstance();
+							forward = action.execute(request, response);
+						}
+					} else {
+						forward.setForward(false);
+						forward.setPath("loginform.do");
+					}
+					break;
 				}
-				break;
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		if(actForward.isForward()) {
-			RequestDispatcher rd = request.getRequestDispatcher(actForward.getPath());
+		if(forward.isForward()) {
+			RequestDispatcher rd = request.getRequestDispatcher(forward.getPath());
 			rd.forward(request, response);
 		} else {
-			response.sendRedirect(actForward.getPath());
+			response.sendRedirect(forward.getPath());
 		}
 	}
 }

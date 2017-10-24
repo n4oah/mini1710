@@ -19,7 +19,7 @@
 	.navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus
 	{
 	padding-top: 30px !important;
-	padding-bottom: 40px
+	padding-bottom: 40px 
 }
 
 body {
@@ -48,19 +48,15 @@ body {
 	table-layout: fixed;
 }
 
-.navbar-nav>li:after {
-	color: #fff;
-	float: right;
-	display: block;
-	z-index: 999;
-	position: relative;
-	font-size: 20px;
+/* .navbar-nav>li:active {
 	margin-top: -63px;
 	margin-right: -4px;
-}
+} */
 
 ul.nav.navbar-nav>li>a {
+	color: white;
 	font-size: 20px;
+	font-weight: bold;
 }
 
 @media ( max-width : 767px) {
