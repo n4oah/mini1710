@@ -13,6 +13,10 @@
 		<servlet-name>FrontController</servlet-name>
 		<servlet-class>controller.action.FrontController</servlet-class>
 	</servlet>
+	
+	<listener>
+		<listener-class>application.MyContextListener</listener-class>
+	</listener>
 
 	<welcome-file-list>
 		<welcome-file>main.do</welcome-file>
