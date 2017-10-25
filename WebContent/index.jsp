@@ -7,14 +7,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메인페이지</title>
 <%@ include file="/jsp/include/basic.jsp"%>
+<link rel="stylesheet" href="./css/main.css" />
 </head>
 <body>
 	<%@ include file="/jsp/include/topmenu.jsp" %>
-	<%@ include file="/jsp/include/bottom.jsp" %>
 	
-	<script type="text/javascript">
-		$(".navbar.navbar-default ul.nav.navbar-nav > li").removeClass("active");
-		$(".navbar.navbar-default ul.nav.navbar-nav > li:eq(0)").addClass("active");
-	</script>
+	<div class="mainbox">
+	
+	</div>
+	
+	<%@ include file="/jsp/include/bottom.jsp" %>
 </body>
 </html>

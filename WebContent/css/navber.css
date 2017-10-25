@@ -1,9 +1,15 @@
+@CHARSET "UTF-8";
 * {
 	border-radius: 0px !important;
 	-moz-border-radius: 0px !important;
 	-webkit-border-radius: 0px !important;
 	border: none !important
 }
+
+nav.navbar.navbar-default {
+	margin-bottom: 0px !important;
+}
+
 /*Override BS*/
 .navbar-nav>li {
 	padding-top: 0px !important;
@@ -22,17 +28,13 @@
 	padding-bottom: 40px 
 }
 
-body {
-	background: #16A085
-}
-
 /*Main CSS*/
-#particles {
-	height: 500px
+#navbar-collapse {
+	margin:0 auto;
 }
 
 .navbar-default {
-	background-color: #026c71;
+	background-color: #212121 !important; /* navber 색 */
 	border-color: none;
 }
 
@@ -47,11 +49,6 @@ body {
 	margin: 0 auto;
 	table-layout: fixed;
 }
-
-/* .navbar-nav>li:active {
-	margin-top: -63px;
-	margin-right: -4px;
-} */
 
 ul.nav.navbar-nav>li>a {
 	color: white;

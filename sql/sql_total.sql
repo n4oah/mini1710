@@ -10,11 +10,12 @@ CREATE TABLE member (
     score NUMBER(8)
 );
 
--- 카테고리 테이블 (Kategorie): cate_no, used name, group_num, order_num
+-- 카테고리 테이블 (Kategorie): cate_no, used, name, uri_name, group_num, order_num
 CREATE TABLE Category (
     cate_no NUMBER PRIMARY KEY,
     used number(1) NOT NULL,
-    name VARCHAR(32) NOT NULL UNIQUE,
+    name VARCHAR2(32) NOT NULL UNIQUE,
+    uri_name VARCHAR2(32) NOT NULL UNIQUE,
     group_num number(2) NOT NULL,
     order_num number(2) NOT NULL
 );

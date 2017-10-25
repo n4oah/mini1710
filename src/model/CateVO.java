@@ -2,7 +2,8 @@ package model;
 
 public class CateVO {
 	private int cateNo, group_num, order_num;
-	private String name;
+	private String name, uriName;
+	private boolean used;
 
 	public int getCateNo() {
 		return cateNo;
@@ -36,9 +37,25 @@ public class CateVO {
 		this.name = name;
 	}
 
+	public boolean isUsed() {
+		return used;
+	}
+
+	public void setUsed(boolean used) {
+		this.used = used;
+	}
+
+	public String getUriName() {
+		return uriName;
+	}
+
+	public void setUriName(String uriName) {
+		this.uriName = uriName;
+	}
+
 	@Override
 	public String toString() {
 		return "CateVO [cateNo=" + cateNo + ", group_num=" + group_num + ", order_num=" + order_num + ", name=" + name
-				+ "]";
+				+ ", uriName=" + uriName + ", used=" + used + "]";
 	}
 }

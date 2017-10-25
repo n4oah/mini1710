@@ -1,6 +1,7 @@
 package controller.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -10,6 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.CateDAO;
+import model.CateVO;
 
 public class FrontController extends HttpServlet {
 	MappingData map = null;
@@ -21,7 +25,20 @@ public class FrontController extends HttpServlet {
 		map.put("loginform.do", new PageConfig("/login.jsp", false));
 		map.put("category/cateAdd.do", new PageConfig("controller.category.CateAddCtrl", false));
 		
-		BoardDAO
+		try {
+			CateDAO dao = new CateDAO();
+			ArrayList<CateVO> list = (ArrayList<CateVO>)dao.getCategoryBoard();
+			System.out.println(list);
+			if(list != null) {
+				for(CateVO vo : list) {
+					PageConfig config = new PageConfig("controller.board.BoardDetail", false);
+					config.setParam("cateNo", Integer.toString(vo.getCateNo()));
+					map.put(vo.getUriName() + ".do", config);
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -49,7 +66,7 @@ public class FrontController extends HttpServlet {
 							forward.setPath(path);
 						} else {
 							Action action = (Action) Class.forName(path).newInstance();
-							forward = action.execute(request, response);
+							forward = action.execute(request, response, map.get(key));
 						}
 					} else {
 						forward.setForward(false);

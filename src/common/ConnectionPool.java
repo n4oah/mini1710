@@ -16,14 +16,13 @@ public class ConnectionPool {
 			ORACLE_SID 	= "xe",
 			ORACLE_USER = "mini1710",
 			ORACLE_PASS = "1234";
-	/*
-	private static final String
+	
+	/*private static final String
 			ORACLE_HOST = "localhost",
 			ORACLE_PORT = "1521",
 			ORACLE_SID 	= "system",
-			ORACLE_USER = "hr",
-			ORACLE_PASS = "oracle";
-	 */
+			ORACLE_USER = "mini1710",
+			ORACLE_PASS = "1234";*/
 
 	static {
 		try {
