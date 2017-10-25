@@ -1,4 +1,4 @@
--- 회원테이블 (Member): id, password, nincname, email, reg_date, level, ip, score
+-- 회원테이블 (Member): id, password, nincname, email, reg_date, level_no, ip, score
 CREATE TABLE member (
     id VARCHAR2(32) PRIMARY KEY,
     pwd VARCHAR2(128) NOT NULL,
@@ -26,6 +26,7 @@ CREATE SEQUENCE cate_seq;
 CREATE TABLE board (
     board_no NUMBER PRIMARY KEY,
 	cate_no NUMBER NOT NULL,
+	used NUMBER(1) NOT NULL,
 	writer VARCHAR2(32) NOT NULL,
 	writer_id VARCHAR2(32) NOT NULL,
 	title VARCHAR2(32) NOT NULL,

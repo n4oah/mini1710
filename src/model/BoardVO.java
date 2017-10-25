@@ -6,6 +6,7 @@ public class BoardVO {
 	private String writer, writerId, title, content;
 	private int boardNo, cateNo, hitCnt, likeCnt;
 	private Date writer_date;
+	private boolean used;
 
 	public String getWriter() {
 		return writer;
@@ -79,10 +80,18 @@ public class BoardVO {
 		this.writer_date = writer_date;
 	}
 
+	public boolean isUsed() {
+		return used;
+	}
+
+	public void setUsed(boolean used) {
+		this.used = used;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardVO [writer=" + writer + ", writerId=" + writerId + ", title=" + title + ", content=" + content
 				+ ", boardNo=" + boardNo + ", cateNo=" + cateNo + ", hitCnt=" + hitCnt + ", likeCnt=" + likeCnt
-				+ ", writer_date=" + writer_date + "]";
+				+ ", writer_date=" + writer_date + ", used=" + used + "]";
 	}
 }

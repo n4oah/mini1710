@@ -28,10 +28,10 @@ public class FrontController extends HttpServlet {
 		try {
 			CateDAO dao = new CateDAO();
 			ArrayList<CateVO> list = (ArrayList<CateVO>)dao.getCategoryBoard();
-			System.out.println(list);
+			
 			if(list != null) {
 				for(CateVO vo : list) {
-					PageConfig config = new PageConfig("controller.board.BoardDetail", false);
+					PageConfig config = new PageConfig("controller.board.BoardList", false);
 					config.setParam("cateNo", Integer.toString(vo.getCateNo()));
 					map.put(vo.getUriName() + ".do", config);
 				}

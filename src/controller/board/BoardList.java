@@ -9,7 +9,7 @@ import controller.action.PageConfig;
 import model.CateDAO;
 import model.CateVO;
 
-public class BoardDetail implements Action {
+public class BoardList implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response, PageConfig config) {
 		String contextPath = request.getContextPath();
@@ -26,11 +26,13 @@ public class BoardDetail implements Action {
 		cateConfig.setCateNo(cateNo);
 		cateConfig.setGroupNo(groupNo);
 		
+		
+		
 		request.setAttribute("cateConfig", cateConfig);
 		
 		ActionForward forward = new ActionForward();
 		forward.setForward(true);
-		forward.setPath("/jsp/pages/board/detail.jsp");
+		forward.setPath("/jsp/pages/board/list.jsp");
 		return forward;
 	}
 }
