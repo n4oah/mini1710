@@ -1,29 +1,56 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navber.css" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:choose>
+	<c:when test="${cateVO.group_num == 0}">
+		<c:set var="pageUri" value="${pageContext.request.contextPath}/${cateVO.uriName}.do" />
+		<c:out value="${pageContext.request.contextPath}/${cateVO.uriName}.do"></c:out>
+		${cateVO.name }
+		asdof
+	</c:when>
+	<c:otherwise>
+		<c:set var="pageUri" value="${pageContext.request.contextPath}/board/list/${cateVO.uriName}.do" />
+		${cateVO.name }
+		bbbbbb
+	</c:otherwise>
+</c:choose>
 <nav class="navbar navbar-default">
+	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+	
+	<c:choose>
+		<c:when test="${!empty sessionScope.loginInfo}">
+			<span class="navbar-login"><a href="${contextPath}/login/logout.do">Logout</a></span>
+		</c:when>
+		<c:otherwise>
+			<span class="navbar-login"><a href="${contextPath}/login/signoutform.do">Sign Out</a></span>
+			<span class="navbar-login"><a href="${contextPath}/login/signinform.do">Sign In</a></span>
+		</c:otherwise>
+	</c:choose>
+	
 	<div class="container">
 		<div class="row">
 			<div class="collapse navbar-collapse" id="main-menu">
 				<ul class="nav navbar-nav">
-					<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-					<%-- <li class="navbarmenu"><a href="${contextPath}/main.do">Home</a></li> --%>
-					
-					<c:if test="${!empty cateList}">
-						<c:forEach var="i" items="${cateList}">
+					<c:if test="${!empty applicationScope.cateList}">
+						<c:forEach var="i" items="${applicationScope.cateList}">
 							<li class="dropdown fadeInDown animated d3 navbarmenu">
-								<a href="${contextPath}/${i.uriName}.do" class="trigger right-caret">
-									<c:out value="${i.name}"></c:out>
-								</a>
+								<c:choose>
+									<c:when test="${i.group_num == 0}">
+										<a href="${contextPath}/${i.uriName}.do" class="trigger right-caret">
+											<c:out value="${i.name}"></c:out>
+										</a>
+									</c:when>
+									<c:otherwise>
+										<a href="${contextPath}/board/list/${i.uriName}.do" class="trigger right-caret">
+											<c:out value="${i.name}"></c:out>
+										</a>
+									</c:otherwise>
+								</c:choose>
 								
-								<c:if test="${i.group_num == cateConfig.groupNo}">
-									<c:set var="pageUri" value="${contextPath}/${i.uriName}.do" />
-								</c:if>
-								
-								<c:if test="${!empty boardList.get(i.group_num)}">
+								<c:if test="${!empty applicationScope.boardList.get(i.group_num)}">
 									<ul class="firstlevel dropdown-menu sub-menu" style="display: none;">
-										<c:forEach var="l" items="${boardList.get(i.group_num)}">
+										<c:forEach var="l" items="${applicationScope.boardList.get(i.group_num)}">
 											<li>
-												<a href="${contextPath}/${l.uriName}.do">
+												<a href="${contextPath}/board/list/${l.uriName}.do">
 													<c:out value="${l.name}"/>
 												</a>
 											</li>
@@ -34,7 +61,7 @@
 						</c:forEach>
 					</c:if>
 					<li class="navbarmenu"><a href="#">Sketch quiz</a></li>
-				</ul>
+       			</ul>
 			</div>
 			
 			<div class="navbar-header page-scroll">
@@ -48,21 +75,18 @@
 		</div>
 	</div>
 </nav>
-
 <script type="text/javascript">
-	$(".navbar.navbar-default ul.nav.navbar-nav > li").removeClass("active");
-	$(".navbar.navbar-default ul.nav.navbar-nav > li > a[href='${pageUri}']").parent().addClass("active");
-</script>
-
-<script type="text/javascript">
-	$(function() {
+	$(function() {//closest("li.navbarmenu").
+		$(".navbar.navbar-default ul.nav.navbar-nav > li").removeClass("active");
+		$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${pageUri}']").closest("li.navbarmenu").addClass("active");
+		
 		$("#main-menu").on("mouseenter", ".dropdown", function() {
 			$(this).find(".firstlevel").parent().addClass("active");
 			$(this).find(".firstlevel").show();
 			$(this).on("mouseleave", function() {
 				$(this).find(".firstlevel").hide();
 				$(this).find(".firstlevel").parent().removeClass("active");
-				$(".navbar.navbar-default ul.nav.navbar-nav > li > a[href='${pageUri}']").parent().addClass("active");
+				$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${pageUri}']").closest("li.navbarmenu").addClass("active");
 			});
 		});
 		
@@ -70,7 +94,7 @@
 			$(this).addClass("active");
 			$(this).on("mouseleave", function() {
 				$(this).removeClass("active");
-				$(".navbar.navbar-default ul.nav.navbar-nav > li > a[href='${pageUri}']").parent().addClass("active");
+				$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${pageUri}']").closest("li.navbarmenu").addClass("active");
 			});
 		});
 	});

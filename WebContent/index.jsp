@@ -13,7 +13,7 @@
 	<%@ include file="/jsp/include/topmenu.jsp" %>
 	
 	<div class="mainbox">
-	
+		<p class="title">프로그래밍 커뮤니티 사이트</p>
 	</div>
 	
 	<%@ include file="/jsp/include/bottom.jsp" %>

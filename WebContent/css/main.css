@@ -2,10 +2,37 @@
 html, body{
 	width: 100%;
 	height: 100%;
+	background-color: #5D5D5D; /* 배경색 */
 }
 
 .mainbox {
 	width: 100%;
 	height: calc(100% - 90px);
 	background-color: #5D5D5D; /* 배경색 */
+	position: relative;
+}
+
+.mainbox > .title {
+	position:absolute;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	
+	font-size: 50px;
+	font-weight: bold;
+	color: white;
+}
+
+.mainbox > .start-btn {
+	position:absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	
+	font-size: 30px;
+	font-weight: bold;
+	color: white;
+	
+	padding: 15px;
+	background-color: #212121;
 }

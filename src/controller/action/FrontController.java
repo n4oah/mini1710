@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.StringMethod;
 import model.CateDAO;
 import model.CateVO;
 
@@ -21,7 +22,6 @@ public class FrontController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		map = MappingData.getInstance();
-		map.put("main.do", new PageConfig("/index.jsp", false));
 		map.put("loginform.do", new PageConfig("/login.jsp", false));
 		map.put("category/cateAdd.do", new PageConfig("controller.category.CateAddCtrl", false));
 		
@@ -30,10 +30,20 @@ public class FrontController extends HttpServlet {
 			ArrayList<CateVO> list = (ArrayList<CateVO>)dao.getCategoryBoard();
 			
 			if(list != null) {
+				String[] boardPatten = {"list", "detail", "modify", "delete"};
+				
 				for(CateVO vo : list) {
-					PageConfig config = new PageConfig("controller.board.BoardList", false);
-					config.setParam("cateNo", Integer.toString(vo.getCateNo()));
-					map.put(vo.getUriName() + ".do", config);
+					if(vo.getGroup_num() == 0) {
+						if(vo.getUriName().equals("home")) {
+							map.put(vo.getUriName() + ".do", new PageConfig("index.jsp" , false));
+						}
+					} else {
+						for(String str : boardPatten) {
+							PageConfig config = new PageConfig("controller.board.Board" + StringMethod.capitalizeFully(str) , false);
+							config.setParam("cateNo", Integer.toString(vo.getCateNo()));
+							map.put("board/" + str.toLowerCase() +"/" + vo.getUriName() + ".do", config);
+						}
+					}
 				}
 			}
 		} catch(Exception e) {

@@ -49,6 +49,35 @@ public class CateDAO {
 		return result;
 	}
 	
+	public CateVO getCategoryDetail(int cateNo) throws Exception {
+		CateVO vo = null;
+		try {
+			con = ConnectionPool.getConnection();
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT * FROM category ");
+			sql.append("WHERE cate_no = ? AND used = 1");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, cateNo);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new CateVO();
+				vo.setCateNo(rs.getInt("cate_no"));
+				vo.setGroup_num(rs.getInt("group_num"));
+				vo.setName(rs.getString("name"));
+				vo.setUriName(rs.getString("uri_name"));
+				vo.setUsed(rs.getInt("used") == 1 ? true : false);
+				vo.setOrder_num(rs.getInt("order_num"));
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			pstmt.close();
+			ConnectionPool.releaseConnection(con);
+		}
+		return vo;
+	}
+	
 	public List<CateVO> getCategorys() throws Exception {
 		List<CateVO> list = null;
 		try {

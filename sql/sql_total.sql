@@ -22,7 +22,7 @@ CREATE TABLE Category (
 
 CREATE SEQUENCE cate_seq;
 
--- 게시판 테이블 (Board): board_no, cate_no, writer, writer_id, title, content, writer_date, hit_cnt, like_cnt
+-- 게시판 테이블 (Board): board_no, cate_no, used, writer, writer_id, title, content, writer_date, hit_cnt, like_cnt
 CREATE TABLE board (
     board_no NUMBER PRIMARY KEY,
 	cate_no NUMBER NOT NULL,
