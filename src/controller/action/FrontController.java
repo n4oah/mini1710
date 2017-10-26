@@ -90,6 +90,8 @@ public class FrontController extends HttpServlet {
 		}
 		
 		if(forward.isForward()) {
+			request.setAttribute("pageUri", uri);
+			
 			RequestDispatcher rd = request.getRequestDispatcher(forward.getPath());
 			rd.forward(request, response);
 		} else {

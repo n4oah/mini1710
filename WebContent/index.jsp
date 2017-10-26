@@ -13,7 +13,8 @@
 	<%@ include file="/jsp/include/topmenu.jsp" %>
 	
 	<div class="mainbox">
-		<p class="title">프로그래밍 커뮤니티 사이트</p>
+		<p class="title">개발자 : 김호진, 권우용</p>
+		
 	</div>
 	
 	<%@ include file="/jsp/include/bottom.jsp" %>

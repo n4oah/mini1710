@@ -1,21 +1,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navber.css" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:choose>
-	<c:when test="${cateVO.group_num == 0}">
-		<c:set var="pageUri" value="${pageContext.request.contextPath}/${cateVO.uriName}.do" />
-		<c:out value="${pageContext.request.contextPath}/${cateVO.uriName}.do"></c:out>
-		${cateVO.name }
-		asdof
-	</c:when>
-	<c:otherwise>
-		<c:set var="pageUri" value="${pageContext.request.contextPath}/board/list/${cateVO.uriName}.do" />
-		${cateVO.name }
-		bbbbbb
-	</c:otherwise>
-</c:choose>
+<c:set var="pageUri" value="${pageContext.request.contextPath}/${pageUri}" />
 <nav class="navbar navbar-default">
 	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-	
+
 	<c:choose>
 		<c:when test="${!empty sessionScope.loginInfo}">
 			<span class="navbar-login"><a href="${contextPath}/login/logout.do">Logout</a></span>
@@ -40,7 +28,8 @@
 										</a>
 									</c:when>
 									<c:otherwise>
-										<a href="${contextPath}/board/list/${i.uriName}.do" class="trigger right-caret">
+										<%-- href="${contextPath}/board/list/${i.uriName}.do"  --%>
+										<a class="trigger right-caret">
 											<c:out value="${i.name}"></c:out>
 										</a>
 									</c:otherwise>
