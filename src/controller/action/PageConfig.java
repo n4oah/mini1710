@@ -18,6 +18,10 @@ public class PageConfig {
 		param.put(key, value);
 	}
 	
+	public void setPath(String path) {
+		this.path = path;
+	}
+
 	public String getParam(String key) {
 		return param.get(key);
 	}

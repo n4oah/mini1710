@@ -22,9 +22,10 @@ public class BoardDAO {
 			sql.append("INSERT INTO board ");
 			sql.append("(board_no, cate_no, used, writer, writer_id, title, content)");
 			sql.append(" VALUES ");
-			sql.append("(board_seq.nextval, ?, ?, ?, ?, ?, ?)");
+			sql.append("(?, ?, ?, ?, ?, ?, ?)");
 			pstmt = con.prepareStatement(sql.toString());
 			int index = 1;
+			pstmt.setInt(index++, vo.getBoardNo());
 			pstmt.setInt(index++, vo.getCateNo());
 			pstmt.setInt(index++, vo.isUsed() ? 1: 0);
 			pstmt.setString(index++, vo.getWriter());
@@ -49,7 +50,7 @@ public class BoardDAO {
 			sql.append("SELECT * FROM board ");
 			sql.append("WHERE board_no = ? AND used = 1");
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(2, boardNo);
+			pstmt.setInt(1, boardNo);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -136,5 +137,70 @@ public class BoardDAO {
 			ConnectionPool.releaseConnection(con);
 		}
 		return cnt;
+	}
+	
+	public int BoardDelete(BoardVO vo) throws Exception {
+		int result = 0;
+		try {
+			con = ConnectionPool.getConnection();
+			StringBuffer sql = new StringBuffer();
+			sql.append("DELETE FROM board ");
+			sql.append("WHERE board_no = ?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, vo.getBoardNo());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				pstmt.close();
+			} catch (Exception e) {}
+			ConnectionPool.releaseConnection(con);
+		}
+		return result;
+	}
+	
+	public int BoardModify(BoardVO vo) throws Exception {
+		int result = 0;
+		try {
+			con = ConnectionPool.getConnection();
+			StringBuffer sql = new StringBuffer();
+			sql.append("UPDATE board SET title = ?, content = ? WHERE board_no = ?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setInt(3, vo.getBoardNo());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				pstmt.close();
+			} catch (Exception e) {}
+			ConnectionPool.releaseConnection(con);
+		}
+		return result;
+	}
+	
+	public int getBoardSeq() throws Exception {
+		int seq = 0;
+		try {
+			con = ConnectionPool.getConnection();
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT board_seq.nextval as num FROM DUAL");
+			pstmt = con.prepareStatement(sql.toString());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				seq = rs.getInt("num");
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				pstmt.close();
+			} catch (Exception e) {}
+			ConnectionPool.releaseConnection(con);
+		}
+		return seq;
 	}
 }

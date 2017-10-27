@@ -14,7 +14,7 @@
 	
 	<div class="mainbox">
 		<p class="title">개발자 : 김호진, 권우용</p>
-		
+		<p class="title2" style="color:white; font-size:3px;">젓가락:양희석</p>
 	</div>
 	
 	<%@ include file="/jsp/include/bottom.jsp" %>

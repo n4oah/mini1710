@@ -10,10 +10,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>${cateVO.name }</title>
 <%@ include file="/jsp/include/basic.jsp"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board/basic.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board/list.css" />
 </head>
 <body>
 	<%@ include file="/jsp/include/topmenu.jsp" %>
+	
+	<c:choose>
+		<c:when test="${empty pageResult}">
+			<c:set var="pageNo" value="1"/>
+		</c:when>
+		<c:otherwise>
+			<c:set var="pageNo" value="${pageResult.pageNo}"/>
+		</c:otherwise>
+	</c:choose>
 
 	<div class="mainbox">
 		<h3 class="title">${cateVO.name}</h3>
@@ -30,13 +40,13 @@
 						<th class="col-xs-1">추천수</th>
 					</tr>
 				</thead>
-	
+				
 				<tbody class="points_table_scrollbar">
 					<c:forEach var="board" items="${boardList}">
 						<tr class="content">
 							<td class="col-xs-1"><c:out value="${board.boardNo}" /></td>
 							<td class="col-xs-5 title">
-								<a href="${pageContext.request.contextPath}/board/detail/${cateVO.uriName}.do?no=${board.boardNo}">
+								<a href="${pageContext.request.contextPath}/board/detail/${cateVO.uriName}.do?pageNo=${pageNo}&no=${board.boardNo}">
 									<c:out value="${board.title }" />
 								</a>
 							</td>
@@ -54,6 +64,7 @@
 				</tbody>
 			</table>
 		</div>
+		<a class="writer-btn" href="${pageContext.request.contextPath}/board/writerform/${pageUri}">글쓰기</a>
 		<navi:page data="${pageResult}" />
 	</div>
 	<%@ include file="/jsp/include/bottom.jsp" %>

@@ -1,11 +1,11 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navber.css" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="pageUri" value="${pageContext.request.contextPath}/${pageUri}" />
+<c:set var="_pageUri" value="${pageContext.request.contextPath}/board/list/${pageUri}" />
 <nav class="navbar navbar-default">
 	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 	<c:choose>
-		<c:when test="${!empty sessionScope.loginInfo}">
+		<c:when test="${!empty sessionScope.user}">
 			<span class="navbar-login"><a href="${contextPath}/login/logout.do">Logout</a></span>
 		</c:when>
 		<c:otherwise>
@@ -26,6 +26,10 @@
 										<a href="${contextPath}/${i.uriName}.do" class="trigger right-caret">
 											<c:out value="${i.name}"></c:out>
 										</a>
+										<c:set var="tmp" value="${i.uriName}.do" />
+										<c:if test="${tmp == pageUri}">
+											<c:set var="_pageUri" value="${pageContext.request.contextPath}/${pageUri}" />
+										</c:if>
 									</c:when>
 									<c:otherwise>
 										<%-- href="${contextPath}/board/list/${i.uriName}.do"  --%>
@@ -49,7 +53,7 @@
 							</li>
 						</c:forEach>
 					</c:if>
-					<li class="navbarmenu"><a href="#">Sketch quiz</a></li>
+					<li class="navbarmenu"><a href="${pageContext.request.contextPath}/quiz.do">Sketch quiz</a></li>
        			</ul>
 			</div>
 			
@@ -67,7 +71,7 @@
 <script type="text/javascript">
 	$(function() {//closest("li.navbarmenu").
 		$(".navbar.navbar-default ul.nav.navbar-nav > li").removeClass("active");
-		$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${pageUri}']").closest("li.navbarmenu").addClass("active");
+		$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${_pageUri}']").closest("li.navbarmenu").addClass("active");
 		
 		$("#main-menu").on("mouseenter", ".dropdown", function() {
 			$(this).find(".firstlevel").parent().addClass("active");
@@ -75,7 +79,7 @@
 			$(this).on("mouseleave", function() {
 				$(this).find(".firstlevel").hide();
 				$(this).find(".firstlevel").parent().removeClass("active");
-				$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${pageUri}']").closest("li.navbarmenu").addClass("active");
+				$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${_pageUri}']").closest("li.navbarmenu").addClass("active");
 			});
 		});
 		
@@ -83,7 +87,7 @@
 			$(this).addClass("active");
 			$(this).on("mouseleave", function() {
 				$(this).removeClass("active");
-				$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${pageUri}']").closest("li.navbarmenu").addClass("active");
+				$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${_pageUri}']").closest("li.navbarmenu").addClass("active");
 			});
 		});
 	});

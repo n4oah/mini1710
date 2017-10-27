@@ -1,0 +1,37 @@
+#mainbox {
+	position: static !important;
+}
+.board-detail{
+	border:1px black solid;
+	background-color: white;
+	
+	width: 90%;
+}
+
+.board-detail th{
+	border:1px black solid;
+	font-size: 15px;
+	padding: 10px;
+	font-weight: bold;
+}
+
+.board-detail td{
+	border:1px black solid;
+	padding: 10px;
+	font-size: 13px;
+}
+
+.button {
+	text-align: right;
+	margin: 5px;
+}
+
+.button > a {
+	text-decoration: none;
+	color: black;
+	margin: 5px;
+}
+
+.button > a:hover {
+	text-decoration: underline;
+}
