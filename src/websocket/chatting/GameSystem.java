@@ -154,7 +154,8 @@ public class GameSystem {
 					GameEnd();
 				}
 				else {
-					DirectMessage("틀렸습니다. 기회는 " + --count + "번 남았습니다.", session);
+					//DirectMessage("틀렸습니다. 기회는 " + --count + "번 남았습니다.", session);
+					DirectMessage("틀렸습니다", session);
 				}
 			}
 		} else {
@@ -393,6 +394,7 @@ public class GameSystem {
 				}
 			}
 			GameList.clear();
+			GameState = false;
 		}
 	}
 
@@ -416,6 +418,10 @@ public class GameSystem {
 			clients.remove(client);
 		}
 		Remove.clear();
+		if(GameList.size() <= 1 && GameState)
+		{
+			GameEnd();
+		}
 	}
 	//세션의 ID검색
 	private String getid(Session session) {
