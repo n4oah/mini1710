@@ -2,9 +2,7 @@ package controller.action;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import common.StringMethod;
 import model.CateDAO;
 import model.CateVO;
 import model.MemberVO;
@@ -24,11 +21,11 @@ public class FrontController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		map = MappingData.getInstance();
-		map.put("category/cateAdd.do", new PageConfig("controller.category.CateAddCtrl", false));
-		map.put("login/signinform.do", new PageConfig("/jsp/pages/login/loginform.jsp", false));
-		map.put("login/login.do", new PageConfig("controller.login.Login", false));
-		map.put("login/signoutform.do", new PageConfig("/jsp/pages/login/signoutform.jsp", false));
-		map.put("login/signout.do", new PageConfig("controller.login.Signout", false));
+		map.put("category/cateAdd.do", new PageConfig("controller.category.CateAddCtrl"));
+		map.put("login/signinform.do", new PageConfig("/jsp/pages/login/loginform.jsp"));
+		map.put("login/login.do", new PageConfig("controller.login.Login"));
+		map.put("login/signoutform.do", new PageConfig("/jsp/pages/login/signoutform.jsp"));
+		map.put("login/signout.do", new PageConfig("controller.login.Signout"));
 		map.put("quiz.do", new PageConfig("/jsp/quiz/games/paintgame.jsp", true));
 		map.put("login/logout.do", new PageConfig("controller.login.Logout", true));
 		
@@ -47,7 +44,7 @@ public class FrontController extends HttpServlet {
 					new PageConfig("writerform", true)
 				};
 				
-				for(CateVO vo : list) {
+				/*for(CateVO vo : list) {
 					if(vo.getGroup_num() == 0) {
 						if(vo.getUriName().equals("home")) {
 							map.put(vo.getUriName() + ".do", new PageConfig("/index.jsp" , false));
@@ -59,7 +56,7 @@ public class FrontController extends HttpServlet {
 							map.put("board/" + pcc.getPath().toLowerCase() +"/" + vo.getUriName() + ".do", config);
 						}
 					}
-				}
+				}*/
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

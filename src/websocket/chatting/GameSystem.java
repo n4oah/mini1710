@@ -42,7 +42,6 @@ public class GameSystem {
 			Qu = DAOInterface.Select("select * from Sketch_quiz", null, QuizData.class);
 			System.out.println(Qu.size());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

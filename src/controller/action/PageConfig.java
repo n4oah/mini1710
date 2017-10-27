@@ -8,6 +8,10 @@ public class PageConfig {
 	private boolean loggin;
 	private Map<String, String> param;
 
+	public PageConfig(String path) {
+		this(path, false);
+	}
+
 	public PageConfig(String path, boolean loggin) {
 		this.param = new HashMap<>();
 		this.path = path;
