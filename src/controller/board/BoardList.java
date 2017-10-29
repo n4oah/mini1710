@@ -20,26 +20,22 @@ public class BoardList implements Action {
 	
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response, PageConfig config) {
-		String contextPath = request.getContextPath();
-		String uri = request.getRequestURI().substring(contextPath.length()+1);
-		
 		ActionForward forward = new ActionForward();
 		try {
+			System.out.println("asdiasd");
+			
 			cateNo = -1;
-			cateNo = Integer.parseInt(config.getParam("cateNo"));
+			cateNo = Integer.parseInt(request.getParameter("cateNo"));
 			
 			try {
 				pageNo = 1;
 				pageNo = Integer.parseInt(request.getParameter("pageNo"));
 			} catch (NumberFormatException e) {}
 			
-			CateDAO dao = new CateDAO();
-			CateVO vo = dao.getCategoryDetail(cateNo);
-			
 			List<BoardVO> list = getPageBoardList();
 			
 			request.setAttribute("boardList", list);
-			request.setAttribute("cateVO", vo);
+			request.setAttribute("cateNo", cateNo);
 			request.setAttribute("pageResult", pageResult);
 			
 			forward.setForward(true);

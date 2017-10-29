@@ -1,7 +1,7 @@
 package model;
 
 public class CateVO {
-	private int cateNo, group_num, order_num;
+	private int cateNo, groupNo, orderNum;
 	private String name, uriName;
 	private boolean used;
 
@@ -12,21 +12,21 @@ public class CateVO {
 	public void setCateNo(int cateNo) {
 		this.cateNo = cateNo;
 	}
-
-	public int getGroup_num() {
-		return group_num;
+	
+	public int getGroupNo() {
+		return groupNo;
 	}
 
-	public void setGroup_num(int group_num) {
-		this.group_num = group_num;
+	public void setGroupNo(int groupNo) {
+		this.groupNo = groupNo;
 	}
 
-	public int getOrder_num() {
-		return order_num;
+	public int getOrderNum() {
+		return orderNum;
 	}
 
-	public void setOrder_num(int order_num) {
-		this.order_num = order_num;
+	public void setOrderNum(int orderNum) {
+		this.orderNum = orderNum;
 	}
 
 	public String getName() {
@@ -55,7 +55,7 @@ public class CateVO {
 
 	@Override
 	public String toString() {
-		return "CateVO [cateNo=" + cateNo + ", group_num=" + group_num + ", order_num=" + order_num + ", name=" + name
+		return "CateVO [cateNo=" + cateNo + ", groupNo=" + groupNo + ", orderNum=" + orderNum + ", name=" + name
 				+ ", uriName=" + uriName + ", used=" + used + "]";
 	}
 }

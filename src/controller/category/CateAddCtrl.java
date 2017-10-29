@@ -15,17 +15,20 @@ public class CateAddCtrl implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response, PageConfig config) {
 		CateDAO dao = new CateDAO();
 		try {
-			dao.addCate("Home", "home", 0);
+			int seq = dao.getSequence();
+			dao.addCate("Home", "home", seq, 1);
 			
-			dao.addCate("Programming", "programming", 1);
-			dao.addCate("Java", "java", 1);
-			dao.addCate("C언어", "c_language", 1);
-			dao.addCate("Python", "python", 1);
+			seq = dao.getSequence();
+			dao.addCate("Programming", "board/list", seq, 1);
+			dao.addCate("Java", "board/list", seq, 2);
+			dao.addCate("C언어", "board/list", seq, 3);
+			dao.addCate("Python", "board/list", seq, 4);
 			
-			dao.addCate("Community", "community", 2);
-			dao.addCate("자유게시판", "free_community", 2);
-			dao.addCate("Q&A 게시판", "newbie", 2);
-			dao.addCate("관리자게시판", "admin", 2);
+			seq = dao.getSequence();
+			dao.addCate("Community", "board/list", seq, 1);
+			dao.addCate("자유게시판", "board/list", seq, 2);
+			dao.addCate("Q&A 게시판", "board/list", seq, 3);
+			dao.addCate("관리자게시판", "board/list", seq, 4);
 			
 			/*
 			BoardDAO dao = new BoardDAO();

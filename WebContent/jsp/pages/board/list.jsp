@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>${cateVO.name }</title>
+<title>${applicationScope.cateList.get(cateNo).name }</title>
 <%@ include file="/jsp/include/basic.jsp"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board/basic.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board/list.css" />
@@ -26,7 +26,7 @@
 	</c:choose>
 
 	<div class="mainbox">
-		<h3 class="title">${cateVO.name}</h3>
+		<h3 class="title">${applicationScope.cateList.get(cateNo).name}</h3>
 		
 		<div class="table">
 			<table class="points_table">
@@ -46,7 +46,7 @@
 						<tr class="content">
 							<td class="col-xs-1"><c:out value="${board.boardNo}" /></td>
 							<td class="col-xs-5 title">
-								<a href="${pageContext.request.contextPath}/board/detail/${cateVO.uriName}.do?pageNo=${pageNo}&no=${board.boardNo}">
+								<a href="${pageContext.request.contextPath}/board/detail.do?cateNo=${cateNo}&pageNo=${pageNo}&no=${board.boardNo}">
 									<c:out value="${board.title }" />
 								</a>
 							</td>
@@ -64,7 +64,7 @@
 				</tbody>
 			</table>
 		</div>
-		<a class="writer-btn" href="${pageContext.request.contextPath}/board/writerform/${pageUri}">글쓰기</a>
+		<a class="writer-btn" href="${pageContext.request.contextPath}/board/writerform.do?cateNo=${cateNo}">글쓰기</a>
 		<navi:page data="${pageResult}" />
 	</div>
 	<%@ include file="/jsp/include/bottom.jsp" %>

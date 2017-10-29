@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import common.StringMethod;
 import model.CateDAO;
 import model.CateVO;
 import model.MemberVO;
@@ -21,13 +22,14 @@ public class FrontController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		map = MappingData.getInstance();
-		map.put("category/cateAdd.do", new PageConfig("controller.category.CateAddCtrl"));
+		map.put("category/CateAddCtrl.do", new PageConfig("controller.category.CateAddCtrl"));
 		map.put("login/signinform.do", new PageConfig("/jsp/pages/login/loginform.jsp"));
 		map.put("login/login.do", new PageConfig("controller.login.Login"));
 		map.put("login/signoutform.do", new PageConfig("/jsp/pages/login/signoutform.jsp"));
 		map.put("login/signout.do", new PageConfig("controller.login.Signout"));
 		map.put("quiz.do", new PageConfig("/jsp/quiz/games/paintgame.jsp", true));
 		map.put("login/logout.do", new PageConfig("controller.login.Logout", true));
+		map.put("home.do", new PageConfig("/index.jsp", false));
 		
 		try {
 			CateDAO dao = new CateDAO();
@@ -44,19 +46,13 @@ public class FrontController extends HttpServlet {
 					new PageConfig("writerform", true)
 				};
 				
-				/*for(CateVO vo : list) {
-					if(vo.getGroup_num() == 0) {
-						if(vo.getUriName().equals("home")) {
-							map.put(vo.getUriName() + ".do", new PageConfig("/index.jsp" , false));
-						}
-					} else {
-						for(PageConfig pcc : pc) {
-							PageConfig config = new PageConfig("controller.board.Board" + StringMethod.capitalizeFully(pcc.getPath()), pcc.isLoggin());
-							config.setParam("cateNo", Integer.toString(vo.getCateNo()));
-							map.put("board/" + pcc.getPath().toLowerCase() +"/" + vo.getUriName() + ".do", config);
-						}
+				for(CateVO vo : list) {
+					for(PageConfig pcc : pc) {
+						PageConfig config = new PageConfig("controller.board.Board" + StringMethod.capitalizeFully(pcc.getPath()), pcc.isLoggin());
+						System.out.println("board/" + pcc.getPath().toLowerCase() + ".do");
+						map.put("board/" + pcc.getPath().toLowerCase() + ".do", config);
 					}
-				}*/
+				}
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -70,7 +66,7 @@ public class FrontController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String uri 	= request.getRequestURI().substring(contextPath.length() + 1);
 		
-		String servletUri = uri.substring(uri.lastIndexOf("/")+1);
+//		String servletUri = uri.substring(uri.lastIndexOf("/")+1);
 		
 		ActionForward forward = new ActionForward();
 		
@@ -97,7 +93,7 @@ public class FrontController extends HttpServlet {
 						forward.setPath(path);
 					} else {
 						Action action = (Action) Class.forName(path).newInstance();
-						map.get(key).setParam("pageUri", servletUri);
+//						map.get(key).setParam("pageUri", servletUri);
 						forward = action.execute(request, response, map.get(key));
 					}
 					break;
@@ -107,7 +103,7 @@ public class FrontController extends HttpServlet {
 			e.printStackTrace();
 		} finally {
 			if(forward.isForward()) {
-				request.setAttribute("pageUri", servletUri);
+//				request.setAttribute("pageUri", servletUri);
 				
 				RequestDispatcher rd = request.getRequestDispatcher(forward.getPath());
 				rd.forward(request, response);

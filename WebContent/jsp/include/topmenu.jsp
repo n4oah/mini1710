@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navber.css" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="_pageUri" value="${pageContext.request.contextPath}/board/list/${pageUri}" />
+<c:set var="pageUri" value="${pageContext.request.contextPath}/board/list.do?cateNo=${cateNo}" />
 <nav class="navbar navbar-default">
 	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -18,32 +18,18 @@
 		<div class="row">
 			<div class="collapse navbar-collapse" id="main-menu">
 				<ul class="nav navbar-nav">
-					<c:if test="${!empty applicationScope.cateList}">
-						<c:forEach var="i" items="${applicationScope.cateList}">
+					<li class="navbarmenu"><a href="${pageContext.request.contextPath}/home.do">Home</a></li>
+					<c:if test="${!empty applicationScope.navCateList}">
+						<c:forEach var="i" items="${applicationScope.navCateList}">
 							<li class="dropdown fadeInDown animated d3 navbarmenu">
-								<c:choose>
-									<c:when test="${i.group_num == 0}">
-										<a href="${contextPath}/${i.uriName}.do" class="trigger right-caret">
-											<c:out value="${i.name}"></c:out>
-										</a>
-										<c:set var="tmp" value="${i.uriName}.do" />
-										<c:if test="${tmp == pageUri}">
-											<c:set var="_pageUri" value="${pageContext.request.contextPath}/${pageUri}" />
-										</c:if>
-									</c:when>
-									<c:otherwise>
-										<%-- href="${contextPath}/board/list/${i.uriName}.do"  --%>
-										<a class="trigger right-caret">
-											<c:out value="${i.name}"></c:out>
-										</a>
-									</c:otherwise>
-								</c:choose>
-								
-								<c:if test="${!empty applicationScope.boardList.get(i.group_num)}">
+								<a href="${contextPath}/${i.uriName}.do?cateNo=${i.cateNo}" class="trigger right-caret">
+									<c:out value="${i.name}"></c:out>
+								</a>
+								<c:if test="${!empty applicationScope.navBoardList.get(i.groupNo)}">
 									<ul class="firstlevel dropdown-menu sub-menu" style="display: none;">
-										<c:forEach var="l" items="${applicationScope.boardList.get(i.group_num)}">
+										<c:forEach var="l" items="${applicationScope.navBoardList.get(i.groupNo)}">
 											<li>
-												<a href="${contextPath}/board/list/${l.uriName}.do">
+												<a href="${contextPath}/${l.uriName}.do?cateNo=${l.cateNo}">
 													<c:out value="${l.name}"/>
 												</a>
 											</li>
@@ -69,17 +55,17 @@
 	</div>
 </nav>
 <script type="text/javascript">
-	$(function() {//closest("li.navbarmenu").
-		$(".navbar.navbar-default ul.nav.navbar-nav > li").removeClass("active");
-		$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${_pageUri}']").closest("li.navbarmenu").addClass("active");
-		
+	$(".navbar.navbar-default ul.nav.navbar-nav > li").removeClass("active");
+	$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${pageUri}']").closest("li.navbarmenu").addClass("active");
+	
+	$(function() {
 		$("#main-menu").on("mouseenter", ".dropdown", function() {
 			$(this).find(".firstlevel").parent().addClass("active");
 			$(this).find(".firstlevel").show();
 			$(this).on("mouseleave", function() {
 				$(this).find(".firstlevel").hide();
 				$(this).find(".firstlevel").parent().removeClass("active");
-				$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${_pageUri}']").closest("li.navbarmenu").addClass("active");
+				$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${pageUri}']").closest("li.navbarmenu").addClass("active");
 			});
 		});
 		
@@ -87,7 +73,7 @@
 			$(this).addClass("active");
 			$(this).on("mouseleave", function() {
 				$(this).removeClass("active");
-				$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${_pageUri}']").closest("li.navbarmenu").addClass("active");
+				$(".navbar.navbar-default ul.nav.navbar-nav > li a[href='${pageUri}']").closest("li.navbarmenu").addClass("active");
 			});
 		});
 	});

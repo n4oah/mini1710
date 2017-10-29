@@ -10,19 +10,19 @@ public class ConnectionPool {
 	private static List<Connection> free = new ArrayList<>();
 	private static List<Connection> used = new ArrayList<>();
 	
-	private static final String
+	/*private static final String
 			ORACLE_HOST = "localhost",
 			ORACLE_PORT = "1521",
 			ORACLE_SID 	= "xe",
 			ORACLE_USER = "mini1710",
-			ORACLE_PASS = "1234";
+			ORACLE_PASS = "1234";*/
 	
-	/*private static final String
+	private static final String
 			ORACLE_HOST = "localhost",
 			ORACLE_PORT = "1521",
 			ORACLE_SID 	= "system",
 			ORACLE_USER = "mini1710",
-			ORACLE_PASS = "1234";*/
+			ORACLE_PASS = "1234";
 
 	static {
 		try {
