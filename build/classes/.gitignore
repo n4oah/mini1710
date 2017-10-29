@@ -1,4 +1,6 @@
+/application/
+/common/
 /controller/
 /model/
 /websocket/
-/application/
+/dasd.class
