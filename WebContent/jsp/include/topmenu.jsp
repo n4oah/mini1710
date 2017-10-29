@@ -1,6 +1,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navber.css" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="pageUri" value="${pageContext.request.contextPath}/board/list.do?cateNo=${cateNo}" />
+<c:if test="${empty pageUri}">
+	<c:set var="pageUri" value="${pageContext.request.contextPath}/board/list.do?cateNo=${cateNo}" />
+</c:if>
 <nav class="navbar navbar-default">
 	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 

@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="./css/main.css" />
 </head>
 <body>
+	<c:set var="pageUri" value="${pageContext.request.contextPath}/home.do"></c:set>
 	<%@ include file="/jsp/include/topmenu.jsp" %>
 	
 	<div class="mainbox">
