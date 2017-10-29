@@ -19,7 +19,9 @@ public class BoardDelete implements Action {
 		HttpSession session = request.getSession();
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
+		int cateNo = Integer.parseInt(request.getParameter("cateNo"));
 		int boardNo = Integer.parseInt(request.getParameter("no"));
+		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
 		BoardDAO dao = new BoardDAO();
 		BoardVO vo = null;
 		try {
@@ -29,7 +31,7 @@ public class BoardDelete implements Action {
 				
 				if(chk > 0) {
 					forward.setForward(false);
-					forward.setPath(request.getContextPath() + "/board/list/" + config.getParam("pageUri"));
+					forward.setPath(request.getContextPath() + "/board/list.do?cateNo=" + cateNo + "&pageNo=" + pageNo);
 				} else {
 				}
 			}

@@ -14,7 +14,7 @@
 <body>
 	<%@ include file="/jsp/include/topmenu.jsp" %>
 	<div class="mainbox">
-		<p class="title">하</p>
+		<p class="title">게시판 보기</p>
 		<table class="board-detail" align="center">
 			<tr>
 				<th>제목</th>
@@ -30,9 +30,9 @@
 			</tr>
 		</table>
 		<div class="button">
-			<a href="${pageContext.request.contextPath}/board/modifyform/${cateName}.do?no=${board.boardNo}">수정</a>
-			<a href="${pageContext.request.contextPath}/board/delete/${cateName}.do?no=${board.boardNo}">삭제</a>
-			<a href="${pageContext.request.contextPath}/board/list/${cateName}.do?pageNo=${pageNo}">목록보기</a>
+			<a href="${pageContext.request.contextPath}/board/modifyform.do?no=${board.boardNo}">수정</a>
+			<a href="${pageContext.request.contextPath}/board/delete.do?cateNo=${board.cateNo}&no=${board.boardNo}&pageNo=${pageNo}">삭제</a>
+			<a href="${pageContext.request.contextPath}/board/list.do?cateNo=${board.cateNo}&pageNo=${pageNo}">목록보기</a>
 		</div>
 	</div>
 	<%@ include file="/jsp/include/bottom.jsp" %>

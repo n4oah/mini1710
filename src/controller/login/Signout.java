@@ -36,7 +36,7 @@ public class Signout implements Action {
 		
 		if(chk >= 1) {
 			forward.setForward(true);
-			forward.setPath("/jsp/pages/login/signoutsuc.jsp");
+			forward.setPath("/login/signinform.do");
 		}
 		return forward;
 	}

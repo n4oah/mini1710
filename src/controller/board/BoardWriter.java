@@ -20,7 +20,8 @@ public class BoardWriter implements Action {
 		MemberVO memVo = (MemberVO)session.getAttribute("user");
 		if(memVo != null) {
 			
-			int cateNo = Integer.parseInt(config.getParam("cateNo"));
+			int cateNo = Integer.parseInt(request.getParameter("cateNo"));
+			
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
 			
@@ -47,7 +48,7 @@ public class BoardWriter implements Action {
 			
 			if(chk > 0) {
 				forward.setForward(true);
-				forward.setPath("/board/detail/" + config.getParam("pageUri") + "?no=" + vo.getBoardNo());
+				forward.setPath("/board/detail.do?no=" + vo.getBoardNo());
 			}
 		} else {
 			forward.setForward(true);

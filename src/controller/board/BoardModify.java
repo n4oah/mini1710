@@ -34,7 +34,7 @@ public class BoardModify implements Action {
 		
 		if(chk > 0) {
 			forward.setForward(false);
-			forward.setPath(request.getContextPath() + "/board/detail/" + config.getParam("pageUri") + "?no=" + no);
+			forward.setPath(request.getContextPath() + "/board/detail.do?no=" + no);
 		}
 		return forward;
 	}	

@@ -12,6 +12,10 @@ public class BoardWriterform implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response, PageConfig config) {
 		ActionForward forward = new ActionForward();
 		
+		int cateNo = Integer.parseInt(request.getParameter("cateNo"));
+		
+		request.setAttribute("cateNo", cateNo);
+		
 		forward.setForward(true);
 		forward.setPath("/jsp/pages/board/writerform.jsp");
 		return forward;

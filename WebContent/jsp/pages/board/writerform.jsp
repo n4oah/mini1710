@@ -20,7 +20,7 @@
 	<%@ include file="/jsp/include/topmenu.jsp"%>
 	<div class="mainbox">
 		<p class="title">글쓰기</p>
-			<form action="${pageContext.request.contextPath}/board/writer/${pageUri}" method="post">
+			<form action="${pageContext.request.contextPath}/board/writer.do?cateNo=${cateNo}" method="post">
 			<div class="table">
 				<table>
 					<tr>
@@ -29,7 +29,7 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea rows="8" cols="80" name="content" ></textarea> </td>
+						<td><textarea rows="8" cols="80" name="content" ></textarea></td>
 					</tr>
 				</table>
 			</div>

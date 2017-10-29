@@ -19,5 +19,5 @@
 	}
 </style>
 <div class="box">
-	<span>Copyrightⓒ2017 By cccccccfoot All right reserved.</span>
+	<span>Copyrightⓒ2017 By KHJ&KWY&YHS All right reserved.</span>
 </div>

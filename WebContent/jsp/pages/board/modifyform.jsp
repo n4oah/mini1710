@@ -15,7 +15,7 @@
 	<div class="mainbox">
 		<p class="title">변경하기</p>
 	
-		<form action="${pageContext.request.contextPath}/board/modify/${pageUri}?no=${board.boardNo}" method="post">
+		<form action="${pageContext.request.contextPath}/board/modify.do?no=${board.boardNo}" method="post">
 			<table class="board-detail" align="center">
 				<tr>
 					<th>제목</th>

@@ -22,7 +22,7 @@ public class FrontController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		map = MappingData.getInstance();
-		map.put("category/CateAddCtrl.do", new PageConfig("controller.category.CateAddCtrl"));
+		map.put("category/cateAddCtrl.do", new PageConfig("controller.category.CateAddCtrl"));
 		map.put("login/signinform.do", new PageConfig("/jsp/pages/login/loginform.jsp"));
 		map.put("login/login.do", new PageConfig("controller.login.Login"));
 		map.put("login/signoutform.do", new PageConfig("/jsp/pages/login/signoutform.jsp"));

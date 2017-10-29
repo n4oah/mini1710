@@ -19,7 +19,7 @@ public class BoardDetail implements Action {
 		int pageNo = 1;
 		try {
 			pageNo = Integer.parseInt(request.getParameter("pageNo"));
-		} catch (Exception e) {System.out.println("asos");}
+		} catch (Exception e) {}
 		BoardVO vo = null;
 		String cateName = null;
 		try {

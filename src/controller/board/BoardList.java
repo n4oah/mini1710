@@ -22,8 +22,6 @@ public class BoardList implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response, PageConfig config) {
 		ActionForward forward = new ActionForward();
 		try {
-			System.out.println("asdiasd");
-			
 			cateNo = -1;
 			cateNo = Integer.parseInt(request.getParameter("cateNo"));
 			
